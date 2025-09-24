@@ -1,32 +1,35 @@
-import { type JSX, useState } from "react";
+import { type JSX, useEffect, useState } from "react";
 
 function TaskList(props: {
-  task: { summary: string; completed: boolean }[];
+  task: Task[];
+  // noinspection SpellCheckingInspection
   callbackfn: (t: any, index: any) => JSX.Element;
 }) {
   return <ul>{props.task.map(props.callbackfn)}</ul>;
 }
-
+interface Task {
+  id: number;
+  description: string;
+  completed: boolean;
+}
 export function Application() {
-  const [task, setTask] = useState([
-    { summary: "something", completed: true },
-    { summary: "something else", completed: false },
-  ]);
+  const [task, setTask] = useState<Task[]>([]);
 
+  function loadTasks() {
+    setTask([
+      { id: 0, description: "create project", completed: true },
+      { id: 1, description: "create react webapp", completed: false },
+      { id: 2, description: "create Hono backend", completed: false },
+    ]);
+  }
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
   return (
-    <>
-      <h2>My Tasks</h2>
-      <TaskList
-        task={task}
-        callbackfn={(t, index) => (
-          <li>
-            <label>
-              <input type={"checkbox"} checked={t.completed} /> {t.summary}
-            </label>
-          </li>
-        )}
-      />
-      <h2>New tasks</h2>
-    </>
+    <TaskList
+      task={task}
+      callbackfn={(t, i) => <li key={t.id}>{t.description}</li>}
+    />
   );
 }
