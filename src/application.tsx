@@ -1,4 +1,11 @@
-import { useState } from "react";
+import { type JSX, useState } from "react";
+
+function TaskList(props: {
+  task: { summary: string; completed: boolean }[];
+  callbackfn: (t: any, index: any) => JSX.Element;
+}) {
+  return <ul>{props.task.map(props.callbackfn)}</ul>;
+}
 
 export function Application() {
   const [task, setTask] = useState([
@@ -8,16 +15,18 @@ export function Application() {
 
   return (
     <>
-      <h1>My Tasks</h1>
-      <ul>
-        {task.map((t, index) => (
+      <h2>My Tasks</h2>
+      <TaskList
+        task={task}
+        callbackfn={(t, index) => (
           <li>
             <label>
               <input type={"checkbox"} checked={t.completed} /> {t.summary}
             </label>
           </li>
-        ))}
-      </ul>
+        )}
+      />
+      <h2>New tasks</h2>
     </>
   );
 }
