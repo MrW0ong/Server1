@@ -1,5 +1,5 @@
-import { type JSX, useEffect, useState } from "react";
-
+import React, { type JSX, useEffect, useState } from "react";
+import type { TaskItem } from "../shared/taskItem.ts";
 function TaskList(props: {
   task: Task[];
   // noinspection SpellCheckingInspection
