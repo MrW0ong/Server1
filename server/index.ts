@@ -15,6 +15,6 @@ const app = new Hono();
 app.get("/api/tasks", (c) => {
   return c.json(initialTasks);
 });
-app.use("/*", serveStatic({ root: "./dist" }));
+app.use("/*", serveStatic({ root: "../dist" }));
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 serve({ fetch: app.fetch, port });
