@@ -21,12 +21,15 @@
   },
   "homepage": "https://github.com/MrW0ong/Server#readme",
   "devDependencies": {
+    "@types/node": "^24.6.1",
     "@types/react-dom": "^19.1.9",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
     "vite": "^7.1.5"
   },
   "dependencies": {
+    "@hono/node-server": "^1.19.5",
+    "hono": "^4.9.9",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "typescript": "^5.9.2"
